@@ -6,12 +6,38 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Add a Preceptor</h1>
+  <h1>Add a New Preceptor</h1>
 
-  <form id="addForm">
-    <input type="text" id="name" placeholder="Preceptor Name" required><br><br>
-    <input type="text" id="site" placeholder="Site Name" required><br><br>
-    <input type="text" id="location" placeholder="Location" required><br><br>
+  <form id="addPreceptorForm">
+    <label for="name">Preceptor Name:</label><br>
+    <input type="text" id="name" required><br><br>
+
+    <label for="degree">Degree (e.g., PharmD, MD, etc.):</label><br>
+    <input type="text" id="degree" required><br><br>
+
+    <label for="site">Rotation Site (Hospital, Pharmacy, Clinic):</label><br>
+    <input type="text" id="site" required><br><br>
+
+    <label for="location">City, State:</label><br>
+    <input type="text" id="location" required><br><br>
+
+    <h2>First Review</h2>
+
+    <label for="stars">Initial Rating (1-5 stars):</label><br>
+    <input type="number" id="stars" min="1" max="5" required><br><br>
+
+    <label for="hours">Approximate Hours per Week:</label><br>
+    <input type="number" id="hours" required><br><br>
+
+    <label for="demand">How demanding was the rotation? (1-5)</label><br>
+    <input type="number" id="demand" min="1" max="5" required><br><br>
+
+    <label for="busyness">How busy was the site? (1-5)</label><br>
+    <input type="number" id="busyness" min="1" max="5" required><br><br>
+
+    <label for="comment">Additional Comments:</label><br>
+    <textarea id="comment" rows="5" cols="40" required></textarea><br><br>
+
     <button type="submit">Add Preceptor</button>
   </form>
 
@@ -19,12 +45,19 @@
 
   <script src="script.js"></script>
   <script>
-    document.getElementById('addForm').addEventListener('submit', function(e) {
+    document.getElementById('addPreceptorForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name = document.getElementById('name').value;
+      const degree = document.getElementById('degree').value;
       const site = document.getElementById('site').value;
       const location = document.getElementById('location').value;
-      addPreceptor(name, site, location);
+      const stars = parseInt(document.getElementById('stars').value);
+      const hours = parseInt(document.getElementById('hours').value);
+      const demand = parseInt(document.getElementById('demand').value);
+      const busyness = parseInt(document.getElementById('busyness').value);
+      const comment = document.getElementById('comment').value;
+
+      addPreceptor(name, degree, site, location, stars, hours, demand, busyness, comment);
     });
   </script>
 </body>
