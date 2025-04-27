@@ -7,12 +7,19 @@
 </head>
 <body>
   <h1>Pharmacy Preceptor Reviews</h1>
-  
-  <input type="text" id="searchBar" placeholder="Search for a preceptor...">
-  <div id="preceptorList"></div>
 
-  <a href="add.html">Add a New Preceptor</a>
+  <input type="text" id="searchInput" placeholder="Search preceptors..." oninput="searchPreceptors()">
+  <br><br>
+
+  <div id="preceptorList">
+    <!-- Preceptors will load here -->
+  </div>
+
+  <a href="add.html">Add a Preceptor</a>
 
   <script src="script.js"></script>
+  <script>
+    displayPreceptors();
+  </script>
 </body>
 </html>
