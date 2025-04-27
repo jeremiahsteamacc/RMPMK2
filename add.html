@@ -3,22 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Add Preceptor</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Add a New Preceptor</h1>
+  <h1>Add a Preceptor</h1>
 
   <form id="addForm">
-    <label>Name: <input type="text" id="name" required></label><br><br>
+    <input type="text" id="name" placeholder="Preceptor Name" required><br><br>
+    <input type="text" id="site" placeholder="Site Name" required><br><br>
+    <input type="text" id="location" placeholder="Location" required><br><br>
     <button type="submit">Add Preceptor</button>
   </form>
 
   <a href="index.html">Back to Home</a>
 
+  <script src="script.js"></script>
   <script>
-    document.getElementById('addForm').addEventListener('submit', function(event) {
-      event.preventDefault();
+    document.getElementById('addForm').addEventListener('submit', function(e) {
+      e.preventDefault();
       const name = document.getElementById('name').value;
-      alert('Preceptor ' + name + ' added! (In future: saved to database)');
+      const site = document.getElementById('site').value;
+      const location = document.getElementById('location').value;
+      addPreceptor(name, site, location);
     });
   </script>
 </body>
