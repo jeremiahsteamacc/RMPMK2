@@ -2,48 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Submit a Review</title>
+  <title>Submit Review</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Submit a Review for Preceptor</h1>
+  <h1>Submit a Review</h1>
 
   <form id="reviewForm">
-    <label>Hours per week:
-      <input type="number" id="hours" required>
-    </label><br><br>
+    <label for="stars">Rating (1-5 stars):</label><br>
+    <input type="number" id="stars" min="1" max="5" required><br><br>
 
-    <label>Would you recommend them?
-      <select id="recommend" required>
-        <option>Yes</option>
-        <option>No</option>
-      </select>
-    </label><br><br>
-
-    <label>How demanding were they (1-5)?
-      <input type="number" id="demanding" min="1" max="5" required>
-    </label><br><br>
-
-    <label>How busy was the rotation (1-5)?
-      <input type="number" id="busy" min="1" max="5" required>
-    </label><br><br>
-
-    <label>Overall Star Rating:
-      <input type="number" id="stars" min="1" max="5" required>
-    </label><br><br>
-
-    <label>Written Experience:<br>
-      <textarea id="experience" rows="5" cols="40" required></textarea>
-    </label><br><br>
+    <label for="comment">Comment:</label><br>
+    <textarea id="comment" rows="5" cols="40" required></textarea><br><br>
 
     <button type="submit">Submit Review</button>
   </form>
 
   <a href="index.html">Back to Home</a>
 
+  <script src="script.js"></script>
   <script>
-    document.getElementById('reviewForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('Review submitted! (Future: save this)');
+    const preceptorId = new URLSearchParams(window.location.search).get('id');
+
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const stars = parseInt(document.getElementById('stars').value);
+      const comment = document.getElementById('comment').value;
+
+      submitReview(preceptorId, stars, comment);
     });
   </script>
 </body>
