@@ -1,4 +1,4 @@
-function addPreceptor(name, degree, site, location, stars, hours, demand, busyness, comment) {
+function addPreceptor(name, degree, rotationType, organization, location, stars, hours, demand, busyness, comment) {
     let preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
     const id = Date.now(); // simple unique ID
 
@@ -6,7 +6,8 @@ function addPreceptor(name, degree, site, location, stars, hours, demand, busyne
         id: id,
         name: name,
         degree: degree,
-        site: site,
+        rotationType: rotationType,
+        organization: organization,
         location: location,
         rating: stars,
         reviews: [{
