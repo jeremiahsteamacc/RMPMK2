@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submit a Review</title>
+</head>
+<body>
+  <h1>Submit a Review for Preceptor</h1>
+
+  <form id="reviewForm">
+    <label>Hours per week:
+      <input type="number" id="hours" required>
+    </label><br><br>
+
+    <label>Would you recommend them?
+      <select id="recommend" required>
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+    </label><br><br>
+
+    <label>How demanding were they (1-5)?
+      <input type="number" id="demanding" min="1" max="5" required>
+    </label><br><br>
+
+    <label>How busy was the rotation (1-5)?
+      <input type="number" id="busy" min="1" max="5" required>
+    </label><br><br>
+
+    <label>Overall Star Rating:
+      <input type="number" id="stars" min="1" max="5" required>
+    </label><br><br>
+
+    <label>Written Experience:<br>
+      <textarea id="experience" rows="5" cols="40" required></textarea>
+    </label><br><br>
+
+    <button type="submit">Submit Review</button>
+  </form>
+
+  <a href="index.html">Back to Home</a>
+
+  <script>
+    document.getElementById('reviewForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      alert('Review submitted! (Future: save this)');
+    });
+  </script>
+</body>
+</html>

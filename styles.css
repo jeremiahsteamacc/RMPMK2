@@ -1,0 +1,19 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+#searchBar {
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+#preceptorList {
+  margin-top: 20px;
+}
+
+a {
+  display: block;
+  margin-top: 20px;
+}
