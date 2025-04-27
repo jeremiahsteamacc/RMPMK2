@@ -15,8 +15,16 @@
     <label for="degree">Degree (e.g., PharmD, MD, etc.):</label><br>
     <input type="text" id="degree" required><br><br>
 
-    <label for="site">Rotation Site (Hospital, Pharmacy, Clinic):</label><br>
-    <input type="text" id="site" required><br><br>
+    <label for="rotationType">Rotation Type:</label><br>
+    <select id="rotationType" required>
+      <option value="Hospital">Hospital</option>
+      <option value="Community Pharmacy">Community Pharmacy</option>
+      <option value="Clinic">Clinic</option>
+      <option value="Other">Other</option>
+    </select><br><br>
+
+    <label for="organization">Organization Name (e.g., Hospital/Pharmacy Name):</label><br>
+    <input type="text" id="organization" required><br><br>
 
     <label for="location">City, State:</label><br>
     <input type="text" id="location" required><br><br>
@@ -49,7 +57,8 @@
       e.preventDefault();
       const name = document.getElementById('name').value;
       const degree = document.getElementById('degree').value;
-      const site = document.getElementById('site').value;
+      const rotationType = document.getElementById('rotationType').value;
+      const organization = document.getElementById('organization').value;
       const location = document.getElementById('location').value;
       const stars = parseInt(document.getElementById('stars').value);
       const hours = parseInt(document.getElementById('hours').value);
@@ -57,7 +66,7 @@
       const busyness = parseInt(document.getElementById('busyness').value);
       const comment = document.getElementById('comment').value;
 
-      addPreceptor(name, degree, site, location, stars, hours, demand, busyness, comment);
+      addPreceptor(name, degree, rotationType, organization, location, stars, hours, demand, busyness, comment);
     });
   </script>
 </body>
