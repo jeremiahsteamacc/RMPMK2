@@ -2,62 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Preceptor Reviews</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Firebase SDK v9+ -->
+  <script type="module" src="script.js" defer></script>
 </head>
 <body>
-  <h1>Preceptor Reviews</h1>
-  <a href="add.html">Add New Preceptor</a>
+  <header>
+    <h1>Preceptor Reviews</h1>
+    <nav>
+      <a href="add.html">Add New Preceptor</a>
+    </nav>
+  </header>
 
-  <!-- Add search bar here -->
-  <input type="text" id="searchBar" placeholder="Search for preceptors..." oninput="filterPreceptors()">
+  <!-- Search Bar -->
+  <section>
+    <input type="text" id="searchBar" placeholder="Search for preceptors..." oninput="filterPreceptors()">
+  </section>
 
-  <h2>Preceptor List</h2>
-  <div id="preceptorList"></div> <!-- This is where the preceptors will show up -->
-
-  <script src="script.js"></script>
-  <script>
-    // Fetch preceptors from localStorage and display them
-    const preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
-    const preceptorListDiv = document.getElementById('preceptorList');
-
-    // Function to display the list of preceptors
-    function displayPreceptors(preceptorsToDisplay) {
-      preceptorListDiv.innerHTML = '';
-
-      if (preceptorsToDisplay.length === 0) {
-        preceptorListDiv.innerHTML = '<p>No preceptors found.</p>';
-      } else {
-        preceptorsToDisplay.forEach(preceptor => {
-          const preceptorItem = document.createElement('div');
-          preceptorItem.classList.add('preceptor-item');
-          preceptorItem.innerHTML = `
-            <h3>${preceptor.name} (${preceptor.degree})</h3>
-            <p><strong>Rotation Type:</strong> ${preceptor.rotationType}</p>
-            <p><strong>Organization:</strong> ${preceptor.organization}</p>
-            <p><strong>Location:</strong> ${preceptor.location}</p>
-            <p><strong>Average Rating:</strong> ${preceptor.rating.toFixed(1)} ⭐</p>
-            <a href="preceptor.html?id=${preceptor.id}">View Details</a>
-          `;
-          preceptorListDiv.appendChild(preceptorItem);
-        });
-      }
-    }
-
-    // Display all preceptors initially
-    displayPreceptors(preceptors);
-
-    // Search function to filter the preceptors list
-    function filterPreceptors() {
-      const query = document.getElementById('searchBar').value.toLowerCase();
-      const filteredPreceptors = preceptors.filter(preceptor => {
-        return (
-          preceptor.name.toLowerCase().includes(query) || 
-          preceptor.rotationType.toLowerCase().includes(query)
-        );
-      });
-      displayPreceptors(filteredPreceptors);
-    }
-  </script>
+  <!-- Preceptor List -->
+  <section id="preceptorList">
+    <h2>Preceptor List</h2>
+    <!-- Dynamic preceptor list will appear here -->
+  </section>
 </body>
 </html>
