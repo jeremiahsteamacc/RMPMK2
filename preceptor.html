@@ -1,8 +1,31 @@
-reviewItem.innerHTML = `
-  <p>⭐ ${review.stars}/5</p>
-  <p><strong>Hours/week:</strong> ${review.hours} | 
-     <strong>Demand:</strong> ${review.demand}/5 | 
-     <strong>Busyness:</strong> ${review.busyness}/5</p>
-  <p>${review.comment}</p>
-  <hr>
-`;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preceptor Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="preceptorInfo"></div>
+
+  <h2>Leave a Review</h2>
+  <form id="reviewForm">
+    <label for="stars">Rating (1-5 stars):</label><br>
+    <input type="number" id="stars" min="1" max="5" required><br><br>
+
+    <label for="hours">Hours per week:</label><br>
+    <input type="number" id="hours" required><br><br>
+
+    <label for="demand">How demanding was the rotation? (1-5):</label><br>
+    <input type="number" id="demand" min="1" max="5" required><br><br>
+
+    <label for="busyness">How busy was the site? (1-5):</label><br>
+    <input type="number" id="busyness" min="1" max="5" required><br><br>
+
+    <label for="comment">Additional comments:</label><br>
+    <textarea id="comment" rows="5" cols="40" required></textarea><br><br>
+
+    <button type="submit">Submit Review</button>
+  </form>
+
+  <a href="index.html">Back to Home</a
