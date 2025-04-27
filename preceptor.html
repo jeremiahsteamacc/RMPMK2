@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Preceptor Profile</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Preceptor Profile</h1>
+
+  <div id="preceptorDetails">
+    <!-- Preceptor info will load here -->
+  </div>
+
+  <a href="index.html">Back to Home</a>
+
+  <script>
+    // Dummy data for now
+    const preceptors = [
+      { id: 1, name: "Dr. Smith", rating: 4.5, description: "Friendly and knowledgeable." },
+      { id: 2, name: "Dr. Johnson", rating: 3.8, description: "Very demanding but fair." },
+    ];
+
+    // Function to get query parameters (like ?id=1)
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Get ID from URL
+    const preceptorId = getQueryParam('id');
+
+    // Find the right preceptor
+    const preceptor = preceptors.find(p => p.id == preceptorId);
+
+    // Display info
+    const detailsDiv = document.getElementById('preceptorDetails');
+
+    if (preceptor) {
+      detailsDiv.innerHTML = `
+        <h2>${preceptor.name}</h2>
+        <p>⭐ Rating: ${preceptor.rating} / 5</p>
+        <p>${preceptor.description}</p>
+        <a href="review.html">Submit a Review for this Preceptor</a>
+      `;
+    } else {
+      detailsDiv.innerHTML = `<p>Preceptor not found.</p>`;
+    }
+  </script>
+</body>
+</html>
