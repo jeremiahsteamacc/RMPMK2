@@ -8,8 +8,11 @@
 <body>
   <h1>Preceptor Reviews</h1>
   <a href="add.html">Add New Preceptor</a>
-  <h2>Preceptor List</h2>
 
+  <!-- Add search bar here -->
+  <input type="text" id="searchBar" placeholder="Search for preceptors..." oninput="filterPreceptors()">
+
+  <h2>Preceptor List</h2>
   <div id="preceptorList"></div> <!-- This is where the preceptors will show up -->
 
   <script src="script.js"></script>
@@ -18,22 +21,42 @@
     const preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
     const preceptorListDiv = document.getElementById('preceptorList');
 
-    if (preceptors.length === 0) {
-      preceptorListDiv.innerHTML = '<p>No preceptors added yet. Add some!</p>';
-    } else {
-      preceptors.forEach(preceptor => {
-        const preceptorItem = document.createElement('div');
-        preceptorItem.classList.add('preceptor-item');
-        preceptorItem.innerHTML = `
-          <h3>${preceptor.name} (${preceptor.degree})</h3>
-          <p><strong>Rotation Type:</strong> ${preceptor.rotationType}</p>
-          <p><strong>Organization:</strong> ${preceptor.organization}</p>
-          <p><strong>Location:</strong> ${preceptor.location}</p>
-          <p><strong>Average Rating:</strong> ${preceptor.rating.toFixed(1)} ⭐</p>
-          <a href="preceptor.html?id=${preceptor.id}">View Details</a>
-        `;
-        preceptorListDiv.appendChild(preceptorItem);
+    // Function to display the list of preceptors
+    function displayPreceptors(preceptorsToDisplay) {
+      preceptorListDiv.innerHTML = '';
+
+      if (preceptorsToDisplay.length === 0) {
+        preceptorListDiv.innerHTML = '<p>No preceptors found.</p>';
+      } else {
+        preceptorsToDisplay.forEach(preceptor => {
+          const preceptorItem = document.createElement('div');
+          preceptorItem.classList.add('preceptor-item');
+          preceptorItem.innerHTML = `
+            <h3>${preceptor.name} (${preceptor.degree})</h3>
+            <p><strong>Rotation Type:</strong> ${preceptor.rotationType}</p>
+            <p><strong>Organization:</strong> ${preceptor.organization}</p>
+            <p><strong>Location:</strong> ${preceptor.location}</p>
+            <p><strong>Average Rating:</strong> ${preceptor.rating.toFixed(1)} ⭐</p>
+            <a href="preceptor.html?id=${preceptor.id}">View Details</a>
+          `;
+          preceptorListDiv.appendChild(preceptorItem);
+        });
+      }
+    }
+
+    // Display all preceptors initially
+    displayPreceptors(preceptors);
+
+    // Search function to filter the preceptors list
+    function filterPreceptors() {
+      const query = document.getElementById('searchBar').value.toLowerCase();
+      const filteredPreceptors = preceptors.filter(preceptor => {
+        return (
+          preceptor.name.toLowerCase().includes(query) || 
+          preceptor.rotationType.toLowerCase().includes(query)
+        );
       });
+      displayPreceptors(filteredPreceptors);
     }
   </script>
 </body>
