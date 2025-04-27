@@ -1,34 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Preceptor Profile</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <h1>Preceptor Profile</h1>
-
-  <div id="preceptorDetails">
-    <!-- Preceptor info will appear here -->
-  </div>
-
-  <div id="reviewsSection">
-    <h2>Reviews</h2>
-    <div id="reviewsList">
-      <!-- Reviews will appear here -->
-    </div>
-    <a id="reviewLink" href="#">Submit a Review</a>
-  </div>
-
-  <br>
-  <a href="index.html">Back to Home</a>
-
-  <script src="script.js"></script>
-  <script>
-    const preceptorId = new URLSearchParams(window.location.search).get('id');
-    const preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
-    const preceptor = preceptors.find(p => p.id == preceptorId);
-
-    const preceptorDetails = document.getElementById('preceptorDetails');
-    const reviewsList = document.getElementById('reviewsList');
-    const
+reviewItem.innerHTML = `
+  <p>⭐ ${review.stars}/5</p>
+  <p><strong>Hours/week:</strong> ${review.hours} | 
+     <strong>Demand:</strong> ${review.demand}/5 | 
+     <strong>Busyness:</strong> ${review.busyness}/5</p>
+  <p>${review.comment}</p>
+  <hr>
+`;
