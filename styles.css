@@ -1,19 +1,43 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
+  background: #f9f9f9;
+  color: #333;
 }
 
-#searchBar {
+h1, h2 {
+  color: #0066cc;
+}
+
+input, textarea {
   width: 300px;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #0066cc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004999;
+}
+
+#preceptorList > div {
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+}
+
+#reviewsList > div {
+  background: white;
   padding: 10px;
-  margin-bottom: 20px;
-}
-
-#preceptorList {
-  margin-top: 20px;
-}
-
-a {
-  display: block;
-  margin-top: 20px;
+  margin-bottom: 10px;
+  border-left: 4px solid #0066cc;
 }
