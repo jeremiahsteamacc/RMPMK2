@@ -1,50 +1,21 @@
-// Initialize preceptors array from Local Storage or empty
-let preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
+// Submit a review
+function submitReview(id, stars, comment) {
+    let preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
+    const index = preceptors.findIndex(p => p.id == id);
 
-// Save preceptors back to Local Storage
-function savePreceptors() {
-    localStorage.setItem('preceptors', JSON.stringify(preceptors));
-}
+    if (index !== -1) {
+        const review = { stars: stars, comment: comment };
+        preceptors[index].reviews.push(review);
 
-// Function to add a new preceptor
-function addPreceptor(name, site, location) {
-    const newPreceptor = {
-        id: Date.now(),
-        name: name,
-        site: site,
-        location: location,
-        rating: null,
-        reviews: []
-    };
-    preceptors.push(newPreceptor);
-    savePreceptors();
-    alert('Preceptor added!');
-    window.location.href = 'index.html'; // Go back to home page
-}
+        // Recalculate average rating
+        const ratings = preceptors[index].reviews.map(r => r.stars);
+        const avgRating = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+        preceptors[index].rating = avgRating;
 
-// Display preceptors on home page
-function displayPreceptors(searchTerm = '') {
-    const preceptorList = document.getElementById('preceptorList');
-    if (!preceptorList) return;
-
-    preceptorList.innerHTML = ''; // Clear previous list
-    preceptors
-        .filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()))
-        .forEach(preceptor => {
-            const preceptorItem = document.createElement('div');
-            preceptorItem.innerHTML = `
-                <h3><a href="preceptor.html?id=${preceptor.id}">${preceptor.name}</a></h3>
-                <p>Site: ${preceptor.site}</p>
-                <p>Location: ${preceptor.location}</p>
-            `;
-            preceptorList.appendChild(preceptorItem);
-        });
-}
-
-// Search function
-function searchPreceptors() {
-    const searchInput = document.getElementById('searchInput');
-    if (!searchInput) return;
-    const searchTerm = searchInput.value;
-    displayPreceptors(searchTerm);
+        localStorage.setItem('preceptors', JSON.stringify(preceptors));
+        alert('Review submitted!');
+        window.location.href = `preceptor.html?id=${id}`;
+    } else {
+        alert('Preceptor not found.');
+    }
 }
