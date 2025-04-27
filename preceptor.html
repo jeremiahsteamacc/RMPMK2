@@ -28,4 +28,59 @@
     <button type="submit">Submit Review</button>
   </form>
 
-  <a href="index.html">Back to Home</a
+  <a href="index.html">Back to Home</a>
+
+  <script src="script.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
+    const preceptor = preceptors.find(p => p.id == id);
+
+    if (preceptor) {
+      const preceptorInfo = document.getElementById('preceptorInfo');
+      preceptorInfo.innerHTML = `
+        <h1>${preceptor.name} (${preceptor.degree})</h1>
+        <h3>${preceptor.site} - ${preceptor.location}</h3>
+        <p><strong>Average Rating:</strong> ${preceptor.rating.toFixed(1)} ⭐</p>
+        <h2>Reviews:</h2>
+        <div id="reviews"></div>
+      `;
+
+      const reviewsDiv = document.getElementById('reviews');
+      preceptor.reviews.forEach(review => {
+        const reviewItem = document.createElement('div');
+        reviewItem.innerHTML = `
+          <p>⭐ ${review.stars}/5</p>
+          <p><strong>Hours/week:</strong> ${review.hours} | 
+             <strong>Demand:</strong> ${review.demand}/5 | 
+             <strong>Busyness:</strong> ${review.busyness}/5</p>
+          <p>${review.comment}</p>
+          <hr>
+        `;
+        reviewsDiv.appendChild(reviewItem);
+      });
+    }
+
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const stars = parseInt(document.getElementById('stars').value);
+      const hours = parseInt(document.getElementById('hours').value);
+      const demand = parseInt(document.getElementById('demand').value);
+      const busyness = parseInt(document.getElementById('busyness').value);
+      const comment = document.getElementById('comment').value;
+
+      preceptor.reviews.push({ stars, hours, demand, busyness, comment });
+
+      // Recalculate average rating
+      let total = 0;
+      preceptor.reviews.forEach(r => total += r.stars);
+      preceptor.rating = total / preceptor.reviews.length;
+
+      localStorage.setItem('preceptors', JSON.stringify(preceptors));
+      alert('Review added!');
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>
