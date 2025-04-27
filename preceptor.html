@@ -9,43 +9,26 @@
   <h1>Preceptor Profile</h1>
 
   <div id="preceptorDetails">
-    <!-- Preceptor info will load here -->
+    <!-- Preceptor info will appear here -->
   </div>
 
+  <div id="reviewsSection">
+    <h2>Reviews</h2>
+    <div id="reviewsList">
+      <!-- Reviews will appear here -->
+    </div>
+    <a id="reviewLink" href="#">Submit a Review</a>
+  </div>
+
+  <br>
   <a href="index.html">Back to Home</a>
 
+  <script src="script.js"></script>
   <script>
-    // Dummy data for now
-    const preceptors = [
-      { id: 1, name: "Dr. Smith", rating: 4.5, description: "Friendly and knowledgeable." },
-      { id: 2, name: "Dr. Johnson", rating: 3.8, description: "Very demanding but fair." },
-    ];
-
-    // Function to get query parameters (like ?id=1)
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-
-    // Get ID from URL
-    const preceptorId = getQueryParam('id');
-
-    // Find the right preceptor
+    const preceptorId = new URLSearchParams(window.location.search).get('id');
+    const preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
     const preceptor = preceptors.find(p => p.id == preceptorId);
 
-    // Display info
-    const detailsDiv = document.getElementById('preceptorDetails');
-
-    if (preceptor) {
-      detailsDiv.innerHTML = `
-        <h2>${preceptor.name}</h2>
-        <p>⭐ Rating: ${preceptor.rating} / 5</p>
-        <p>${preceptor.description}</p>
-        <a href="review.html">Submit a Review for this Preceptor</a>
-      `;
-    } else {
-      detailsDiv.innerHTML = `<p>Preceptor not found.</p>`;
-    }
-  </script>
-</body>
-</html>
+    const preceptorDetails = document.getElementById('preceptorDetails');
+    const reviewsList = document.getElementById('reviewsList');
+    const
