@@ -6,6 +6,7 @@ import { getDatabase, ref, push, get, set, update, child } from "firebase/databa
 const firebaseConfig = {
   apiKey: "AIzaSyADv4HIvEaPaVc5NrfsnbNARpT5f4q7pMg",
   authDomain: "rmpmk2-a097a.firebaseapp.com",
+  databaseURL: "https://rmpmk2-a097a-default-rtdb.firebaseio.com", // ✅ Added this line
   projectId: "rmpmk2-a097a",
   storageBucket: "rmpmk2-a097a.appspot.com",
   messagingSenderId: "383802807213",
