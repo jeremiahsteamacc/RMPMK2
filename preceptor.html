@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Preceptor Profile</title>
   <link rel="stylesheet" href="styles.css">
+  <script type="module" src="script.js" defer></script>
 </head>
 <body>
   <div id="preceptorInfo"></div>
@@ -13,74 +14,21 @@
     <label for="stars">Rating (1-5 stars):</label><br>
     <input type="number" id="stars" min="1" max="5" required><br><br>
 
-    <label for="hours">Hours per week:</label><br>
+    <label for="hours">Hours per Week:</label><br>
     <input type="number" id="hours" required><br><br>
 
-    <label for="demand">How demanding was the rotation? (1-5):</label><br>
+    <label for="demand">Demand (1-5):</label><br>
     <input type="number" id="demand" min="1" max="5" required><br><br>
 
-    <label for="busyness">How busy was the site? (1-5):</label><br>
+    <label for="busyness">Busyness (1-5):</label><br>
     <input type="number" id="busyness" min="1" max="5" required><br><br>
 
-    <label for="comment">Additional comments:</label><br>
+    <label for="comment">Comments:</label><br>
     <textarea id="comment" rows="5" cols="40" required></textarea><br><br>
 
     <button type="submit">Submit Review</button>
   </form>
 
   <a href="index.html">Back to Home</a>
-
-  <script src="script.js"></script>
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-    const preceptors = JSON.parse(localStorage.getItem('preceptors')) || [];
-    const preceptor = preceptors.find(p => p.id == id);
-
-    if (preceptor) {
-      const preceptorInfo = document.getElementById('preceptorInfo');
-      preceptorInfo.innerHTML = `
-        <h1>${preceptor.name} (${preceptor.degree})</h1>
-        <h3>${preceptor.site} - ${preceptor.location}</h3>
-        <p><strong>Average Rating:</strong> ${preceptor.rating.toFixed(1)} ⭐</p>
-        <h2>Reviews:</h2>
-        <div id="reviews"></div>
-      `;
-
-      const reviewsDiv = document.getElementById('reviews');
-      preceptor.reviews.forEach(review => {
-        const reviewItem = document.createElement('div');
-        reviewItem.innerHTML = `
-          <p>⭐ ${review.stars}/5</p>
-          <p><strong>Hours/week:</strong> ${review.hours} | 
-             <strong>Demand:</strong> ${review.demand}/5 | 
-             <strong>Busyness:</strong> ${review.busyness}/5</p>
-          <p>${review.comment}</p>
-          <hr>
-        `;
-        reviewsDiv.appendChild(reviewItem);
-      });
-    }
-
-    document.getElementById('reviewForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const stars = parseInt(document.getElementById('stars').value);
-      const hours = parseInt(document.getElementById('hours').value);
-      const demand = parseInt(document.getElementById('demand').value);
-      const busyness = parseInt(document.getElementById('busyness').value);
-      const comment = document.getElementById('comment').value;
-
-      preceptor.reviews.push({ stars, hours, demand, busyness, comment });
-
-      // Recalculate average rating
-      let total = 0;
-      preceptor.reviews.forEach(r => total += r.stars);
-      preceptor.rating = total / preceptor.reviews.length;
-
-      localStorage.setItem('preceptors', JSON.stringify(preceptors));
-      alert('Review added!');
-      window.location.reload();
-    });
-  </script>
 </body>
 </html>
