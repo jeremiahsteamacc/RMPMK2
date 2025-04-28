@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Add Preceptor</title>
   <link rel="stylesheet" href="styles.css">
+  <script type="module" src="script.js" defer></script>
 </head>
 <body>
   <h1>Add a New Preceptor</h1>
@@ -12,7 +13,7 @@
     <label for="name">Preceptor Name:</label><br>
     <input type="text" id="name" required><br><br>
 
-    <label for="degree">Degree (e.g., PharmD, MD, etc.):</label><br>
+    <label for="degree">Degree (e.g., PharmD, MD):</label><br>
     <input type="text" id="degree" required><br><br>
 
     <label for="rotationType">Rotation Type:</label><br>
@@ -23,7 +24,7 @@
       <option value="Other">Other</option>
     </select><br><br>
 
-    <label for="organization">Organization Name (e.g., Hospital/Pharmacy Name):</label><br>
+    <label for="organization">Organization Name:</label><br>
     <input type="text" id="organization" required><br><br>
 
     <label for="location">City, State:</label><br>
@@ -34,40 +35,7 @@
     <label for="stars">Initial Rating (1-5 stars):</label><br>
     <input type="number" id="stars" min="1" max="5" required><br><br>
 
-    <label for="hours">Approximate Hours per Week:</label><br>
+    <label for="hours">Hours per Week:</label><br>
     <input type="number" id="hours" required><br><br>
 
-    <label for="demand">How demanding was the rotation? (1-5)</label><br>
-    <input type="number" id="demand" min="1" max="5" required><br><br>
-
-    <label for="busyness">How busy was the site? (1-5)</label><br>
-    <input type="number" id="busyness" min="1" max="5" required><br><br>
-
-    <label for="comment">Additional Comments:</label><br>
-    <textarea id="comment" rows="5" cols="40" required></textarea><br><br>
-
-    <button type="submit">Add Preceptor</button>
-  </form>
-
-  <a href="index.html">Back to Home</a>
-
-  <script src="script.js"></script>
-  <script>
-    document.getElementById('addPreceptorForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const degree = document.getElementById('degree').value;
-      const rotationType = document.getElementById('rotationType').value;
-      const organization = document.getElementById('organization').value;
-      const location = document.getElementById('location').value;
-      const stars = parseInt(document.getElementById('stars').value);
-      const hours = parseInt(document.getElementById('hours').value);
-      const demand = parseInt(document.getElementById('demand').value);
-      const busyness = parseInt(document.getElementById('busyness').value);
-      const comment = document.getElementById('comment').value;
-
-      addPreceptor(name, degree, rotationType, organization, location, stars, hours, demand, busyness, comment);
-    });
-  </script>
-</body>
-</html>
+    <label for="demand">Demand (1-5):</label
